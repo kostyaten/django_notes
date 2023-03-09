@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "django-notes"
+version = "0.1.0"
+description = ""
+authors = ["Kostya Ten <kostya@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "django_notes"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.7"
+djangorestframework = "^3.14.0"
+django-dotenv = "^1.4.2"
+python-json-logger = "^2.0.7"
+drf-spectacular = "^0.26.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.0.1"
+django-stubs = {extras = ["compatible-mypy"], version = "^1.15.0"}
+djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^1.9.1"}
+flake8 = "^6.0.0"
+black = "^23.1.0"
+pytest-django = "^4.5.2"
+coverage = "^7.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.11"
+exclude = ["docs"]
+ignore_missing_imports = true
+strict_optional = true
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "django_notes.settings"
+
+[tool.pytest.ini_options]
+python_files = "*_test.py"
+DJANGO_SETTINGS_MODULE = "django_notes.settings"
